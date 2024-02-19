@@ -2,7 +2,8 @@ function newcard() {
   const content = document.getElementById("content")
   content.innerHTML = ""
 
-  createForm() 
+  let submitCard = createForm()
+  return submitCard
 }
 
 function createForm() {
@@ -18,10 +19,31 @@ function createForm() {
   des.setAttribute("rows", "50")
   des.setAttribute("cols", "50")
 
+  let b = document.createElement("button")
+  b.type = "button"
+  b.id = "submit"
+  b.innerHTML = "Submit"
+
   f.appendChild(title)
   f.appendChild(des)
+  f.appendChild(b)
 
   content.appendChild(f)
+  
+  let a;
+  
+  document.getElementById("submit").addEventListener("click", () => {
+    a = submit(title.value, des.value)
+  })
+
+  return a
+}
+
+function submit(title, des) {
+
+  let array = {title:title, description:des}
+  return array
+
 }
 
 export {newcard}

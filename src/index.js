@@ -40,11 +40,7 @@ allCards()
 function newCard() {
   content.innerHTML = ""
 
-  form.appendChild(tl)
-  form.appendChild(ti)
-  form.appendChild(dl)
-  form.appendChild(di)
-  form.appendChild(submitButton)
+  form.append(tl, ti, dl, di, submitButton)
   content.appendChild(form)
 
   submitButton.addEventListener("click", submitValues)
@@ -53,9 +49,25 @@ function newCard() {
 function submitValues() {
   let card = {title:ti.value, description:di.value}
   cards.push(card)
-  console.log(card)
+  allCards()
 }
 
 function allCards() {
   content.innerHTML = ""
+
+  for (let i = 0; i < cards.length; i++) {
+    let card = document.createElement("div")
+    card.setAttribute("class", "card")
+    let cardTitle = document.createElement("p")
+    cardTitle.setAttribute("class", "cardTitle")
+    let cardDesc = document.createElement("p")
+    cardDesc.setAttribute("class", "cardDesc")
+
+    cardTitle.innerText = cards[i].title
+    cardDesc.innerText = cards[i].description
+
+    card.append(cardTitle, cardDesc)
+    content.append(card)
+
+  }
 }
